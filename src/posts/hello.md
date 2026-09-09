@@ -1,19 +1,14 @@
 ---
-title: "Template: how these writeups are structured"
+title: 'Template: how these writeups are structured'
 date: 2026-09-09
 summary: The shape every project writeup on this site follows, and what each field in the margin means.
-# Optional. Only fill this in with a figure you actually measured.
-result: null
-# Optional. Screen recording for this post — rendered under the title.
-# Use an absolute URL; video files never live in this repo.
-video: null
-poster: null
-videoCaption: null
-# Optional. YouTube video ID only, used when `video` is empty.
-youtube: null
-# Optional. Link to the repo for the project.
-repo: null
-draft: true
+draft: false
+result: ''
+video: ''
+poster: /uploads/badge versus.png
+videoCaption: ''
+youtube: ''
+repo: ''
 ---
 
 This file is a template. Copy it, rename it, set `draft: false`, and it appears on
@@ -25,8 +20,8 @@ the home page ordered by date. Delete this one once you have two real posts.
 the index, so write it as the claim rather than a teaser.
 
 `result` prints in the left margin in oxblood, and it exists for one purpose: a
-figure you measured yourself. Something like `62% → 98% valid` or `₹0.71 → ₹0.06
-per doc`. Leave it `null` when there is no such number. An empty margin is better
+figure you measured yourself. Something like `62% → 98% valid` or \`₹0.71 → ₹0.06
+per doc`. Leave it `null\` when there is no such number. An empty margin is better
 than a decorative one.
 
 `repo` prints a link to the code. A writeup without a repo is an opinion.
@@ -88,7 +83,7 @@ digits line up down the page. Use them for measurements, not for prose.
 Markdown accepts raw HTML, so no plugin is needed. Copy one of these three.
 
 The post's main recording goes in frontmatter, not the body. These snippets are for
-*additional* clips inside a section.
+_additional_ clips inside a section.
 
 **Short silent clip** — the default for demos under about 60 seconds. Video files
 live on R2, never in this repo.
