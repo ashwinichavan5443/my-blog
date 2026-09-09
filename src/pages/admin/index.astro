@@ -1,0 +1,21 @@
+---
+// Served as a real route so /admin resolves in dev and in production alike.
+// (A plain index.html under public/ only answers /admin/index.html in dev.)
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content editor</title>
+    <!-- Point the CMS at its config explicitly rather than relying on lookup. -->
+    <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
+  </head>
+  <body>
+    <!-- Sveltia CMS runs entirely in the browser and commits to GitHub.
+         Pin this to a specific version once sign-in works — see README. -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About — Ashwini"
+  description="Ashwini is an AI engineer working on applied LLM systems, structured output reliability, and inference cost."
+>
+  <div class="ledger">
+    <aside class="margin">
+      <dl>
+        <div>
+          <dt>Role</dt>
+          <!-- TODO: your title, and your employer if you want it here -->
+          <dd>AI engineer</dd>
+        </div>
+        <div>
+          <dt>Location</dt>
+          <dd>Mumbai, India</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <!-- TODO: replace with your real address -->
+          <dd><a href="mailto:you@example.com">you@example.com</a></dd>
+        </div>
+        <div>
+          <dt>Elsewhere</dt>
+          <!-- TODO: replace both handles -->
+          <dd>
+            <a href="https://github.com/YOUR-USERNAME">GitHub</a><br />
+            <a href="https://www.linkedin.com/in/YOUR-HANDLE">LinkedIn</a>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+
+    <article class="prose">
+      <h1>About</h1>
+
+      <p>
+        I am an AI engineer. I build production pipelines that use language models
+        for narrow, repetitive work, and I spend most of my time on the parts that
+        decide whether such a system survives contact with real volume: whether the
+        output validates, how often it has to be retried, and what it costs per
+        successful result.
+      </p>
+
+      <h2>The argument I keep making</h2>
+
+      <p>
+        A lot of shipped LLM features are a frontier API behind a prompt. That works
+        until volume arrives, and then the unit economics decide the feature's
+        future rather than the roadmap does. The interesting engineering is in the
+        middle: constrained decoding instead of retries, a small tuned model for the
+        narrow task, a deterministic solver for the parts that were never a language
+        problem, and an escalation path to a large model only for the inputs that
+        need one.
+      </p>
+
+      <p>
+        The answer is rarely all API or all self-hosted. It depends on volume,
+        latency tolerance, and what a wrong answer costs. I'd rather publish the
+        threshold than pick a side.
+      </p>
+
+      <h2>What I'm doing right now</h2>
+
+      <p>
+        Building one system at a time and taking each through three stages — a
+        frontier API, self-hosted open weights, then a fine-tune — scoring every
+        stage against the same held-out set. The writeups here carry the
+        architecture, the numbers, and the failures. Code is on GitHub.
+      </p>
+
+      <h2>Working together</h2>
+
+      <p>
+        If you have an LLM feature that works but costs more than it earns, or one
+        that returns malformed output often enough that someone is patching it by
+        hand, that is the problem I most like to be handed. Email is the fastest way
+        to reach me.
+      </p>
+    </article>
+  </div>
+</Base>

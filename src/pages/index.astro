@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+
+const modules = import.meta.glob('../posts/*.md', { eager: true });
+
+const posts = Object.entries(modules)
+  .filter(([, m]) => m.frontmatter?.draft !== true)
+  .map(([filepath, m]) => ({
+    ...m.frontmatter,
+    url: `/posts/${filepath.split('/').pop().replace(/\.md$/, '')}`,
+  }))
+  .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+const fmt = (d) =>
+  new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<Base title="Ashwini — building and measuring LLM systems">
+  <div class="ledger">
+    <aside class="margin">
+      <dl>
+        <div>
+          <dt>Based in</dt>
+          <dd>Mumbai, India</dd>
+        </div>
+        <div>
+          <dt>Works on</dt>
+          <dd>Applied LLM systems</dd>
+        </div>
+      </dl>
+    </aside>
+
+    <div>
+      <h1 class="thesis">Most LLM features work in the demo and break on the invoice.</h1>
+      <p class="standfirst">
+        I build systems that do real work with small models, and I publish what they
+        actually cost — accuracy, latency, and rupees per thousand calls, measured on
+        the same held-out set every time.
+      </p>
+      <p class="standfirst">
+        Each project here is built three ways: against a frontier API, against
+        self-hosted open weights, then against a fine-tune. The numbers go in the margin.
+      </p>
+    </div>
+  </div>
+
+  <section class="entries">
+    {posts.length === 0 && (
+      <p class="empty">
+        First writeup goes live shortly. Add a markdown file to <code>src/posts/</code> and it appears here.
+      </p>
+    )}
+    {posts.map((post) => (
+      <article class="entry">
+        <div class="ledger">
+          <div class="margin">
+            <dl>
+              <div>
+                <dt>{fmt(post.date)}</dt>
+                {post.result && <dd class="figure-note">{post.result}</dd>}
+              </div>
+            </dl>
+          </div>
+          <div>
+            <h2><a href={post.url}>{post.title}</a></h2>
+            <p>{post.summary}</p>
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+</Base>

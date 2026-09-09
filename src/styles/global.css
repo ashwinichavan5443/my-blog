@@ -1,0 +1,491 @@
+/* ------------------------------------------------------------------
+   Design tokens — "plotter ledger"
+   Cool paper, ink navy, plotter-pen blue. Oxblood is reserved
+   exclusively for real measured figures. Do not use it decoratively.
+   ------------------------------------------------------------------ */
+
+:root {
+  --paper: #f1f3f1;
+  --paper-raised: #f7f8f6;
+  --ink: #131c22;
+  --muted: #5a6862;
+  --pen: #29508f;
+  --pen-wash: #dde3ee;
+  --oxblood: #8a2e27;
+  --rule: #cfd5d0;
+
+  --measure: 66ch;
+  --margin-col: 10.5rem;
+  --gutter: 2.25rem;
+
+  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3125rem;
+  --step-2: 1.75rem;
+  --step-3: 2.375rem;
+  --step-4: clamp(2.5rem, 5.5vw, 3.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  font-weight: 400;
+  line-height: 1.68;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------- Shell ---------------------------- */
+
+.shell {
+  max-width: calc(var(--margin-col) + var(--gutter) + var(--measure));
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2.25rem 0 1.125rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 3.5rem;
+}
+
+.masthead a.wordmark {
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.masthead nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: var(--step--1);
+}
+
+.masthead nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.masthead nav a:hover,
+.masthead nav a[aria-current='page'] {
+  color: var(--ink);
+  border-bottom-color: var(--pen);
+}
+
+/* ------------------------- Ledger rows -------------------------
+   Two columns: metadata margin on the left, content on the right,
+   separated by a hairline. Collapses to stacked on narrow screens.
+   --------------------------------------------------------------- */
+
+.ledger {
+  display: grid;
+  grid-template-columns: var(--margin-col) var(--measure);
+  gap: 0 var(--gutter);
+  align-items: start;
+}
+
+.ledger > .margin {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-right: var(--gutter);
+  border-right: 1px solid var(--rule);
+  min-height: 100%;
+}
+
+.margin dl {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.margin dt {
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+.margin dd {
+  margin: 0.1rem 0 0;
+  color: var(--ink);
+}
+
+.margin a {
+  color: var(--pen);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pen-wash);
+}
+
+.margin a:hover {
+  border-bottom-color: var(--pen);
+}
+
+/* Reserved for genuine measured figures only. */
+.margin dd.figure-note,
+.margin .figure-note {
+  color: var(--oxblood);
+}
+
+/* ---------------------------- Hero ---------------------------- */
+
+.thesis {
+  font-size: var(--step-4);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.5rem;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+
+.standfirst {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  max-width: 54ch;
+}
+
+.standfirst + .standfirst {
+  margin-top: 1rem;
+}
+
+/* --------------------------- Entries --------------------------- */
+
+.entries {
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.entry {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry h2 {
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  margin: 0 0 0.5rem;
+}
+
+.entry h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.entry h2 a:hover {
+  color: var(--pen);
+}
+
+.entry p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.empty {
+  padding: 1.75rem 0 0;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.empty code {
+  font-family: var(--mono);
+  font-size: 0.82em;
+}
+
+/* ---------------------------- Prose ---------------------------- */
+
+.prose h1 {
+  font-size: var(--step-3);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+.prose h2 {
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 3rem 0 0.85rem;
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+  margin: 2.25rem 0 0.6rem;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0 0 1.35rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+}
+
+.prose a {
+  color: var(--pen);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pen-wash);
+}
+
+.prose a:hover {
+  border-bottom-color: var(--pen);
+}
+
+.prose blockquote {
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--pen);
+  color: var(--muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2rem 0;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.08em 0.28em;
+}
+
+.prose pre {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  margin: 0 0 1.5rem;
+}
+
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Tables carry real data — tabular figures, ruled, never striped. */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 1.75rem;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.prose th {
+  font-weight: 600;
+  border-bottom: 1px solid var(--ink);
+}
+
+.prose td:not(:first-child),
+.prose th:not(:first-child) {
+  text-align: right;
+  padding-right: 0;
+  padding-left: 0.75rem;
+}
+
+
+/* ---------------------------- Media ----------------------------
+   Screen recordings are evidence, so they get the same treatment as
+   a data table: ruled, captioned, full measure. Self-hosted MP4 is
+   the default; the embed wrapper is for long narrated walkthroughs.
+   ---------------------------------------------------------------- */
+
+.prose figure {
+  margin: 2.25rem 0;
+}
+
+/* The hero recording sits directly under the title, so it carries a
+   little more air below it than an inline figure. */
+.prose figure.demo {
+  margin: 0 0 2.75rem;
+}
+
+.prose figure video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--ink);
+  border: 1px solid var(--rule);
+}
+
+.prose figcaption {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  max-width: 62ch;
+}
+
+/* Responsive wrapper for a YouTube/Vimeo iframe. */
+.prose .embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--rule);
+  background: var(--ink);
+}
+
+.prose .embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Terminal casts via asciinema keep text selectable. */
+.prose .cast {
+  border: 1px solid var(--rule);
+  background: var(--paper-raised);
+  padding: 0.5rem;
+  margin: 2.25rem 0;
+}
+
+/* ---------------------------- Footer ---------------------------- */
+
+.colophon {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.colophon a {
+  color: var(--pen);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pen-wash);
+}
+
+.colophon a:hover {
+  border-bottom-color: var(--pen);
+}
+
+/* --------------------------- A11y ---------------------------- */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1.5rem;
+  top: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ink);
+  color: var(--paper);
+  z-index: 10;
+}
+
+/* --------------------------- Responsive --------------------------- */
+
+@media (max-width: 56rem) {
+  :root {
+    --step-0: 1rem;
+  }
+
+  .ledger {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .ledger > .margin {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding-right: 0;
+    padding-bottom: 1rem;
+    min-height: 0;
+  }
+
+  .margin dl {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, auto));
+    gap: 0.75rem 1.75rem;
+  }
+
+  .entries {
+    margin-top: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

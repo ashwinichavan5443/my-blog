@@ -1,0 +1,78 @@
+# Sveltia CMS configuration.
+# TODO: set `repo` to your GitHub owner/repo before this will work.
+
+backend:
+  name: github
+  repo: ashwinichavan5443/my-blog
+  branch: main
+
+# Images uploaded through the editor land here and are committed to the repo.
+# Keep these small — screenshots and poster frames only.
+# Video files do NOT belong here. Upload those to R2 and paste the URL.
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: src/posts
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    summary: '{{title}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
+      - name: summary
+        label: Summary
+        widget: text
+        hint: One line stating the finding, not teasing it. Shows on the index.
+
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: true
+        hint: Leave on until it is ready. Drafts stay off the index.
+
+      - name: result
+        label: Measured result
+        widget: string
+        required: false
+        hint: >
+          Only a figure you measured yourself, e.g. "62% → 98% valid".
+          Leave empty when there is not one. Prints in the margin in oxblood.
+
+      - name: video
+        label: Demo recording (MP4 URL)
+        widget: string
+        required: false
+        hint: >
+          Absolute URL to the clip on R2, e.g.
+          https://media.yourdomain.com/clips/name.mp4 — never upload video here.
+      - name: poster
+        label: Poster frame
+        widget: image
+        required: false
+        hint: Without this the player is a black rectangle until someone presses play.
+      - name: videoCaption
+        label: Recording caption
+        widget: text
+        required: false
+        hint: Say what the clip shows, including resolution and whether it has audio.
+      - name: youtube
+        label: YouTube video ID
+        widget: string
+        required: false
+        hint: ID only, not the full URL. Used only when the MP4 field is empty.
+
+      - name: repo
+        label: Repository URL
+        widget: string
+        required: false
+
+      - name: body
+        label: Body
+        widget: markdown

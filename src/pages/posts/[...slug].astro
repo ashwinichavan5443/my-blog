@@ -1,0 +1,32 @@
+---
+import PostLayout from '../../layouts/Post.astro';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../posts/*.md', { eager: true });
+
+  return Object.entries(modules)
+    // Drafts are excluded from the build entirely, so there is no live URL for
+    // them. Hiding a draft from the index alone would still leave it reachable.
+    .filter(([, mod]) => mod.frontmatter?.draft !== true)
+    .map(([filepath, mod]) => ({
+      params: { slug: filepath.split('/').pop().replace(/\.md$/, '') },
+      props: { mod },
+    }));
+}
+
+const { mod } = Astro.props;
+const { frontmatter, Content } = mod;
+
+let minutes = null;
+try {
+  if (typeof mod.rawContent === 'function') {
+    minutes = Math.max(1, Math.round(mod.rawContent().split(/\s+/).length / 220));
+  }
+} catch {
+  minutes = null;
+}
+---
+
+<PostLayout frontmatter={frontmatter} minutes={minutes}>
+  <Content />
+</PostLayout>

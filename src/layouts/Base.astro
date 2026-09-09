@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+
+const { title, description = 'Ashwini builds and measures LLM systems — accuracy, latency and cost.' } = Astro.props;
+const path = Astro.url.pathname;
+const isHome = path === '/' || path.startsWith('/posts');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,500;0,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="shell">
+      <header class="masthead">
+        <a class="wordmark" href="/">Ashwini</a>
+        <nav>
+          <a href="/" aria-current={isHome ? 'page' : undefined}>Writing</a>
+          <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <slot />
+      </main>
+
+      <footer class="colophon">
+        {/* TODO: replace YOUR-USERNAME with your GitHub handle */}
+        <p>Written by Ashwini. Code for the projects lives on <a href="https://github.com/YOUR-USERNAME">GitHub</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

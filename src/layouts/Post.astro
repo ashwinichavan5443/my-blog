@@ -1,0 +1,81 @@
+---
+import Base from './Base.astro';
+
+const { frontmatter, minutes } = Astro.props;
+const { title, date, summary, repo, result, video, poster, youtube, videoCaption } =
+  frontmatter;
+
+const stamp = date
+  ? new Date(date).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
+  : null;
+---
+
+<Base title={`${title} — Ashwini`} description={summary}>
+  <div class="ledger">
+    <aside class="margin">
+      <dl>
+        {stamp && (
+          <div>
+            <dt>Published</dt>
+            <dd>{stamp}</dd>
+          </div>
+        )}
+        {minutes && (
+          <div>
+            <dt>Length</dt>
+            <dd>{minutes} min read</dd>
+          </div>
+        )}
+        {result && (
+          <div>
+            <dt>Measured</dt>
+            <dd class="figure-note">{result}</dd>
+          </div>
+        )}
+        {(video || youtube) && (
+          <div>
+            <dt>Demo</dt>
+            <dd><a href="#demo">Recording</a></dd>
+          </div>
+        )}
+        {repo && (
+          <div>
+            <dt>Code</dt>
+            <dd><a href={repo}>Repository</a></dd>
+          </div>
+        )}
+      </dl>
+    </aside>
+
+    <article class="prose">
+      <h1>{title}</h1>
+
+      {video && (
+        <figure id="demo" class="demo">
+          <video controls muted loop playsinline preload="metadata" poster={poster} src={video}></video>
+          {videoCaption && <figcaption>{videoCaption}</figcaption>}
+        </figure>
+      )}
+
+      {!video && youtube && (
+        <figure id="demo" class="demo">
+          <div class="embed">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${youtube}`}
+              title={`Walkthrough: ${title}`}
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+          {videoCaption && <figcaption>{videoCaption}</figcaption>}
+        </figure>
+      )}
+
+      <slot />
+    </article>
+  </div>
+</Base>
