@@ -2,7 +2,7 @@
 title: 'Template: how these writeups are structured'
 date: 2026-09-09
 summary: The shape every project writeup on this site follows, and what each field in the margin means.
-draft: true
+draft: false
 result: ''
 video: ''
 poster: /uploads/badge versus.png
