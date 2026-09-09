@@ -2,7 +2,7 @@
 title: testing
 date: 2026-09-09
 summary: just want to see how it looks
-draft: true
+draft: false
 result: ''
 video: ''
 poster: /uploads/badge versus.png
